@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import styled from "styled-components";
 
 const TableRow = styled.div`
@@ -38,3 +40,12 @@ const Discount = styled.div`
   font-weight: 500;
   color: var(--color-green-700);
 `;
+
+function CabinRow({ cabin }) {
+  const { name, maxCapacity, regularPrice, discount, description, image } =
+    cabin;
+
+  return <TableRow role="row"></TableRow>;
+}
+
+export default CabinRow;
