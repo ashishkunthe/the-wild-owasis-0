@@ -45,7 +45,16 @@ function CabinRow({ cabin }) {
   const { name, maxCapacity, regularPrice, discount, description, image } =
     cabin;
 
-  return <TableRow role="row"></TableRow>;
+  return (
+    <TableRow role="row">
+      <img src={image} />
+      <p>{name}</p>
+      <p>{maxCapacity}</p>
+      <p>{regularPrice}</p>
+      <p>{discount}</p>
+      <p>{description}</p>
+    </TableRow>
+  );
 }
 
 export default CabinRow;
