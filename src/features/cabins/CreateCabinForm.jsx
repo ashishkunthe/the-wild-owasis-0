@@ -11,7 +11,6 @@ import { createEditCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
 import FormRow from "../../ui/FormRow";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { types } from "tar";
 
 const FormRow2 = styled.div`
   display: grid;
