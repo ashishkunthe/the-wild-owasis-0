@@ -6,6 +6,7 @@ import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
 import { useDeleteCabin } from "./useDeleteCabin";
 import { CheckSquareFilled, CopyOutlined } from "@hi-ui/icons";
+import { useCreateCabin } from "./useCreateCabin";
 
 const TableRow = styled.div`
   display: grid;
@@ -49,6 +50,7 @@ const Discount = styled.div`
 function CabinRow({ cabin }) {
   const [showForm, setShowForm] = useState(false);
   const { isDeleting, deleteCabin } = useDeleteCabin();
+  const { isCreating, createCabin } = useCreateCabin();
 
   const {
     id: cabinId,
@@ -59,6 +61,17 @@ function CabinRow({ cabin }) {
     description,
     image,
   } = cabin;
+
+  function handleDuplicate() {
+    createCabin({
+      name: `duplicate of ${name}`,
+      maxCapacity,
+      regularPrice,
+      discount,
+      description,
+      image,
+    });
+  }
 
   return (
     <>
@@ -73,10 +86,10 @@ function CabinRow({ cabin }) {
           <span> &mdash; </span>
         )}
         <div>
-          <button>
+          <button disabled={isCreating} onClick={handleDuplicate}>
             <CopyOutlined />
           </button>
-          <button onClick={() => setShowForm((show) => !show)}>Edit</button>
+          <button onClick={() => setShowForm((show) => !show)}>Edit </button>
           <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
             Delete
           </button>
