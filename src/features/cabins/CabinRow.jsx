@@ -5,8 +5,10 @@ import { formatCurrency } from "../../utils/helpers";
 import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
 import { useDeleteCabin } from "./useDeleteCabin";
-import { CheckSquareFilled, CopyOutlined } from "@hi-ui/icons";
+import { CopyOutlined } from "@hi-ui/icons";
 import { useCreateCabin } from "./useCreateCabin";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const TableRow = styled.div`
   display: grid;
@@ -90,9 +92,18 @@ function CabinRow({ cabin }) {
             <CopyOutlined />
           </button>
           <button onClick={() => setShowForm((show) => !show)}>Edit </button>
-          <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
-            Delete
-          </button>
+          <Modal>
+            <Modal.Open opens="delete">
+              <button>Delete</button>
+            </Modal.Open>
+            <Modal.Window name="delete">
+              <ConfirmDelete
+                resourceName="cabin"
+                disabled={isDeleting}
+                onConfirm={() => deleteCabin(cabinId)}
+              />
+            </Modal.Window>
+          </Modal>
         </div>
       </TableRow>
       {showForm && <CreateCabinForm cabinToEdit={cabin} />}
